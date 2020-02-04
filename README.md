@@ -5,7 +5,7 @@ Links to usefull docs and tutorials
 # python
 
 
-# python folders
+## python folders
 >>> import os
 >>> os.getcwd()
 '/home/user'
@@ -16,8 +16,35 @@ Links to usefull docs and tutorials
 export PYTHONPATH=/path/to/my/library:$PYTHONPATH
 set PYTHONPATH=%PYTHONPATH%;C:\My_python_lib
 
-# Python web server
+## python Threading
+### Example
 
+```python
+import unittest
+
+class TestStringMethods(unittest.TestCase):
+
+    def test_upper(self):
+        self.assertEqual('foo'.upper(), 'FOO')
+
+    def test_isupper(self):
+        self.assertTrue('FOO'.isupper())
+        self.assertFalse('Foo'.isupper())
+
+    def test_split(self):
+        s = 'hello world'
+        self.assertEqual(s.split(), ['hello', 'world'])
+        # check that s.split fails when the separator is not a string
+        with self.assertRaises(TypeError):
+            s.split(2)
+
+if __name__ == '__main__':
+    unittest.main()
+``` 
+
+## Python web
+### Simple Python web server
+```python
 """
 Very simple HTTP server in python for logging requests
 Usage::
@@ -67,8 +94,9 @@ if __name__ == '__main__':
     else:
         run()
 
-# multithreaded server python
-# https://stackoverflow.com/questions/14088294/multithreaded-web-server-in-python
+### multithreaded server python
+https://stackoverflow.com/questions/14088294/multithreaded-web-server-in-python
+```python
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from socketserver import ThreadingMixIn
 import threading
@@ -96,8 +124,8 @@ def run():
 
 if __name__ == '__main__':
     run()
-
-# HTTPS openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
+```
+HTTPS openssl req -x509 -newkey rsa:4096 -nodes -out cert.pem -keyout key.pem -days 365
 
 # c++
 
