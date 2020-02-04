@@ -4,6 +4,26 @@ Links to usefull docs and tutorials
 
 # python
 
+## Python packages:
+
+SoloLearn/
+   LICENSE.txt
+   README.txt
+   setup.py
+   sololearn/
+      __init__.py
+      sololearn.py
+      sololearn2.py
+
+
+    .
+    ├── LICENSE.txt                   # Compiled files (alternatively `dist`)
+    ├── README.txt                    # Documentation files (alternatively `doc`)
+    ├── setup.py                     # Source files (alternatively `lib` or `app`)
+    ├── sololearn/                    # Automated tests (alternatively `spec` or `tests`)
+    ├── tools                   # Tools and utilities
+    ├── LICENSE
+    └── README.md
 
 ## python folders
 >>> import os
