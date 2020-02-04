@@ -16,7 +16,7 @@ Links to usefull docs and tutorials
 export PYTHONPATH=/path/to/my/library:$PYTHONPATH
 set PYTHONPATH=%PYTHONPATH%;C:\My_python_lib
 
-## python Threading
+## python utest
 ### Example
 
 ```python
@@ -41,6 +41,97 @@ class TestStringMethods(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 ``` 
+## python threading
+### Example
+```python
+import random
+import threading
+
+
+def list_append(count, id, out_list):
+    """
+    Creates an empty list and then appends a 
+    random number to the list 'count' number
+    of times. A CPU-heavy operation!
+    """
+    for i in range(count):
+        out_list.append(random.random())
+
+if __name__ == "__main__":
+    size = 10000000   # Number of random numbers to add
+    threads = 2   # Number of threads to create
+
+    # Create a list of jobs and then iterate through
+    # the number of threads appending each thread to
+    # the job list 
+    jobs = []
+    for i in range(0, threads):
+        out_list = list()
+        thread = threading.Thread(target=list_append(size, i, out_list))
+        jobs.append(thread)
+
+    # Start the threads (i.e. calculate the random number lists)
+    for j in jobs:
+        j.start()
+
+    # Ensure all of the threads have finished
+    for j in jobs:
+        j.join()
+
+    print("List processing complete.")
+```
+
+### Example locks
+```python
+threading_lock.py
+import logging
+import random
+import threading
+import time
+
+
+class Counter:
+
+    def __init__(self, start=0):
+        self.lock = threading.Lock()
+        self.value = start
+
+    def increment(self):
+        logging.debug('Waiting for lock')
+        self.lock.acquire()
+        try:
+            logging.debug('Acquired lock')
+            self.value = self.value + 1
+        finally:
+            self.lock.release()
+
+
+def worker(c):
+    for i in range(2):
+        pause = random.random()
+        logging.debug('Sleeping %0.02f', pause)
+        time.sleep(pause)
+        c.increment()
+    logging.debug('Done')
+
+
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='(%(threadName)-10s) %(message)s',
+)
+
+counter = Counter()
+for i in range(2):
+    t = threading.Thread(target=worker, args=(counter,))
+    t.start()
+
+logging.debug('Waiting for worker threads')
+main_thread = threading.main_thread()
+for t in threading.enumerate():
+    if t is not main_thread:
+        t.join()
+logging.debug('Counter: %d', counter.value)
+```
 
 ## Python web
 ### Simple Python web server
