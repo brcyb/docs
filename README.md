@@ -1,2 +1,11 @@
 # docs
-Some docs and tutorials
+Links to usefull docs and tutorials
+
+
+# python
+
+
+
+
+# c++
+
